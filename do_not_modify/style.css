@@ -1,0 +1,173 @@
+/***
+ This code runs the overview view in
+ index.html.
+
+ NOT INTENDED TO BE MODIFIED BY STUDENTS
+ (though if you want to change colors or 
+ fonts or something, feel free)
+***/
+
+html {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+main iframe {
+  width: 100%;
+  height: calc(100vh - 68px);
+  border: none;
+}
+
+main {
+  padding: 8px;
+}
+
+.sbs main > div {
+  border: 1px inset;
+}
+
+nav {
+  margin: auto;
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #ddd; /* Adds a bottom border for the tab container */
+}
+
+nav a {
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
+  border-bottom: 3px solid transparent; /* Transparent border initially */
+  margin-right: 20px;
+  font-size: 16px;
+  transition: border-color 300ms, color 300ms;
+}
+
+nav a:hover {
+  color: #007bff; /* Change color on hover */
+}
+
+nav a.active {
+  border-bottom: 3px solid #007bff; /* Underline active tab */
+  color: #007bff;
+}
+
+.center img {
+  max-width: calc(min(100%, 100vh - 66px));
+  max-height: calc(min(100%, 100vh - 66px));
+}
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: calc(100vh - 66px);
+  box-sizing: border-box;
+}
+.content {
+  opacity: 0;
+  pointer-events: none;
+}
+.visible {
+  display: block;
+  opacity: 1;
+  pointer-events: all;
+  transition: opacity 500ms;
+}
+main {
+  position: relative;
+}
+main div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 4px);
+  height: calc(100vh - 66px);
+}
+
+/* Side-by-side code */
+
+.sbs main {
+  display: flex;
+  gap: 10px;
+}
+/* Get rid of absolute positioning we used for cross-fade */
+.sbs div {
+  position: initial;
+  box-sizing: border-box;
+}
+/* Just toggle display : block to display: none
+Old-school style... */
+.sbs .content {
+  display: none;
+}
+.sbs .visible {
+  display: block;
+}
+/* ALWAYS show the original */
+.sbs #original {
+  display: block;
+  opacity: 1;
+}
+.orig-link {
+  transition: opacity 300ms;
+}
+/* Don't show the original tab */
+.sbs .orig-link {
+  opacity: 0;
+}
+.sbs-toggle {
+  transition: opacity 300ms;
+}
+.original .sbs-toggle {
+  opacity: 0;
+}
+
+/* Popout link code */
+header {
+  position: sticky;
+  top: 0;
+}
+.popout-bar {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+header:hover .popout-bar {
+  opacity: 1;
+}
+.popout-bar {
+  display: flex;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+#minimize {
+  transition: transform 300ms;
+  background: transparent;
+  border: none;
+}
+header.minimized #minimize {
+  transform: rotate(180deg);
+}
+header {
+  transition: transform 300ms;
+  z-index: 2;
+}
+header nav {
+  height: 48px;
+}
+.minimized {
+  transform: translateY(-48px);
+}
+.popout-link::after {
+  content: "↗";
+  font-size: 8px;
+  vertical-align: super;
+}
